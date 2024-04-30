@@ -17,7 +17,7 @@ class StoreCandleCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'app:store-candle {--to=} {--from=}';
+    protected $signature = 'app:store-candle {--to=} {--from=} {--log}';
 
     /**
      * The console command description.
@@ -60,7 +60,7 @@ class StoreCandleCommand extends Command
                     $result = json_decode($res->getBody()->getContents());
                     foreach($result as $data) {
                         if ($to > $data->candle_date_time_kst) {
-                            echo "$symbol logging completed! ($process/{$symbols->count()})\n";
+                            if ($this->option('log')) echo "$symbol logging completed! ($process/{$symbols->count()})\n";
                             $go = false;
                             break;
                         }
@@ -86,16 +86,16 @@ class StoreCandleCommand extends Command
                         sleep(1);
                     }
                     if ($e->getCode() === 404) {
-                        echo "Undefined symbol: {$symbol} ($process/{$symbols->count()})\n";
+                        if ($this->option('log')) echo "Undefined symbol: {$symbol} ($process/{$symbols->count()})\n";
                     } elseif ($e->getCode() === 429) {
-                        echo "Too many requests\n";
+                        if ($this->option('log')) echo "Too many requests\n";
                         exit;
                     }
                     $go = false;
                 }
             }
         }
-        echo "$fromRaw ~ $to data has been stored!\n";
+        if ($this->option('log')) echo "$fromRaw ~ $to data has been stored!\n";
         DB::commit();
     }
 

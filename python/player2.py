@@ -13,10 +13,12 @@ def trade(trader, symbol):
         print(decision, trader.player_id)
     elif decision['alert'] == 'buy':
         res = trader.buy(symbol, 1000000)
-        print(res, 'buy', trader.player_id, symbol)
+        if (res['status'] == 'success'):
+            print(res, 'buy', trader.player_id, symbol)
     elif decision['alert'] == 'sell':
         res = trader.sell(symbol, decision['reason'])
-        print(res, 'sell', trader.player_id, symbol)
+        if (res['status'] == 'success'):
+            print(res, 'sell', trader.player_id, symbol)
 
 
 def main():
