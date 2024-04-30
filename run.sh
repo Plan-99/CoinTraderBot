@@ -1,4 +1,4 @@
-nohup zsh ./get_price.sh &
+nohup $0 ./get_price.sh &
 
 cd python
 nohup python3 player1.py &
