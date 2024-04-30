@@ -1,7 +1,7 @@
 requests
 python-dotenv
 pymysql
-pytorch
+torch
 numpy
 pandas
 matplotlib

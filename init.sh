@@ -8,6 +8,9 @@ cd ../frontend
 npm install
 quasar build
 
+cd ../python
+pip install -r requirements.txt
+
 cd ../
 
 
