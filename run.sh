@@ -1,4 +1,4 @@
-sudo nohup $0 ./get_price.sh &
+sudo nohup $1 ./get_price.sh &
 
 cd python
 sudo nohup python3 player1.py &
