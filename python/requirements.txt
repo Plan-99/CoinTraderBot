@@ -1,0 +1,8 @@
+requests
+python-dotenv
+pymysql
+pytorch
+numpy
+pandas
+matplotlib
+bs4

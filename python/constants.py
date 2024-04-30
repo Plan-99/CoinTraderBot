@@ -1,0 +1,8 @@
+WINDOW_LEN = 60
+TARGET_GAP = 5
+HIDDEN_DIM = 64  # 모델의 히든 사이즈
+NHEAD = 1  # 멀티헤드 어텐션의 헤드 수
+NUM_LAYERS = 4  # 인코더 레이어 수
+BATCH_SIZE = 100
+LEARNING_RATE = 0.0005
+EPOCHS = 10
