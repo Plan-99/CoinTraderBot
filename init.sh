@@ -9,7 +9,6 @@ npm install
 quasar build
 
 cd ../
-nohup ./get_price.sh &
-nohup ./run.sh 0 &
-nohup ./run.sh 1 &
+
+
 
