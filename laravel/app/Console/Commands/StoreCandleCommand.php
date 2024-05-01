@@ -64,12 +64,13 @@ class StoreCandleCommand extends Command
                             $go = false;
                             break;
                         }
-                        $idx = $symbol . Carbon::createFromFormat('Y-m-d H:i:s', str_replace('T', ' ', $data->candle_date_time_kst))->format('YmdHis');
+                        $code = $symbol . Carbon::createFromFormat('Y-m-d H:i:s', str_replace('T', ' ', $data->candle_date_time_kst))->format('YmdHis');
                         Candle::firstOrCreate([
-                            'symbol' => $symbol,
-                            'timestamp' => $data->candle_date_time_kst,
+                            'code' => $code,
                         ], [
                             'candle_seq_log_id' => $candleSeq->id,
+                            'symbol' => $symbol,
+                            'timestamp' => $data->candle_date_time_kst,
                             'opening_price' => (float) $data->opening_price,
                             'high_price' => (float) $data->high_price,
                             'low_price' => (float) $data->low_price,

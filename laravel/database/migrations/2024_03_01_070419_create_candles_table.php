@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('candles', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->unique();
             $table->foreignId('candle_seq_log_id')->constrained();
             $table->string('symbol');
             $table->unsignedDouble('opening_price');
