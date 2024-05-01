@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('candles', function (Blueprint $table) {
-            $table->string('idx')->unique()->primary();
+            $table->id();
             $table->foreignId('candle_seq_log_id')->constrained();
             $table->string('symbol');
             $table->unsignedDouble('opening_price');

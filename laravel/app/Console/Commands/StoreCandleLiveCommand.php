@@ -15,7 +15,7 @@ class StoreCandleLiveCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'app:store-candle-live';
+    protected $signature = 'app:store-candle-live {--log}';
 
     /**
      * The console command description.
@@ -33,7 +33,8 @@ class StoreCandleLiveCommand extends Command
             $candleSeq = CandleSeqLog::latest()->first();
             $toRaw = $candleSeq ? $candleSeq->from : Carbon::now()->subDay()->format('Y-m-d H:i:s');
             $to = str_replace(' ', 'T', $toRaw);
-            Artisan::call("app:store-candle --to={$to}");
+            $logOption = $this->option('log') ? '--log' : '';
+            Artisan::call("app:store-candle --to={$to} {$logOption}");
             Candle::where('timestamp', '<', Carbon::now()->subDays(2))->delete();
         }
     }

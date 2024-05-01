@@ -17,7 +17,7 @@ class AssetSeeder extends Seeder
             Asset::create([
                 'player_id' => $i,
                 'symbol' => 'KRW',
-                'buy_price' => 0,
+                'buy_price' => 1,
                 'quantity' => 10000000
             ]);
         }

@@ -9,6 +9,12 @@ sudo zsh ./init.sh
 
 ## Run
 ```shell
-sudo zsh ./run.sh zsh
+sudo nohup zsh ./get_price.sh &
+
+cd python
+nohup python3 player1.py &
+mv nohup.out nohup1.out
+nohup python3 player2.py &
+mv nohup.out nohup2.out
+cd ../
 ```
-Write first argument as the script type you are using.

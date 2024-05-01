@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('trade_logs', function (Blueprint $table) {
+            $table->id();
             $table->unsignedInteger('player_id');
             $table->string('symbol');
             $table->unsignedDouble('price');
