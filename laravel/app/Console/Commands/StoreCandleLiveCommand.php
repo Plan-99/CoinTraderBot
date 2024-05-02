@@ -29,13 +29,11 @@ class StoreCandleLiveCommand extends Command
      */
     public function handle()
     {
-        while (true) {
-            $candleSeq = CandleSeqLog::latest()->first();
-            $toRaw = $candleSeq ? $candleSeq->from : Carbon::now()->subDay()->format('Y-m-d H:i:s');
-            $to = str_replace(' ', 'T', $toRaw);
-            $logOption = $this->option('log') ? '--log' : '';
-            Artisan::call("app:store-candle --to={$to} {$logOption}");
-            Candle::where('timestamp', '<', Carbon::now()->subDays(2))->delete();
-        }
+        Candle::where('timestamp', '<', Carbon::now()->subDays(2))->delete();
+        $candleSeq = CandleSeqLog::latest()->first();
+        $toRaw = $candleSeq ? $candleSeq->from : Carbon::now()->subDay()->format('Y-m-d H:i:s');
+        $to = str_replace(' ', 'T', $toRaw);
+        $logOption = $this->option('log') ? '--log' : '';
+        Artisan::call("app:store-candle --to={$to} {$logOption}");
     }
 }

@@ -24,9 +24,8 @@ def trade(trader, symbol):
 def main():
     trader = Trader(api_key, api_secret, 2)
     symbols = trader.get_symbols()
-    while True:
-        for symbol in symbols:
-            trade(trader, symbol)
+    for symbol in symbols:
+        trade(trader, symbol)
 
 
 # 스크립트를 실행하려면 여백의 녹색 버튼을 누릅니다.
