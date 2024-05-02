@@ -2,10 +2,10 @@
   <q-page class="q-pa-md">
     <div class="row q-col-gutter-md">
       <div class="col-12 col-sm-6 col-md-4" v-for="player in players" :key="player.id">
-        <div style="border: 1px solid gray" class="q-pa-md cursor-pointer">
+        <div style="border: 1px solid gray" class="q-pa-md cursor-pointer" @click="$router.push(`player/${player.id}`)">
           <div class="text-h6">{{ player.name }}</div>
           <div>{{ player.description }}</div>
-          <div class="q-mt-md">현재 금액: {{ numberWithCommas(player.current_amount.toFixed(0)) }}</div>
+          <div class="q-mt-md">현재 금액: {{ numberWithCommas(player.current_amount.toFixed(0)) }}원</div>
           <div class="text-h6" :class="`text-${player.current_amount > player.buy_amount ? 'green' : 'red' }`">{{ (player.current_amount  * 100 / player.buy_amount - 100).toFixed(3) }} %</div>
         </div>
       </div>
@@ -16,6 +16,7 @@
 <script>
 import {defineComponent, ref} from 'vue'
 import {api} from "boot/axios";
+import {Loading} from "quasar";
 
 export default defineComponent({
   name: 'IndexPage',
@@ -27,15 +28,17 @@ export default defineComponent({
     ])
 
     function getPlayers() {
+      Loading.show()
       api.get('/total_asset?query_s=groupByPlayer').then((res) => {
         players.value.forEach((p) => {
-          console.log(res.data)
           const player = res.data.data.find((e) => p.id === e.player_id)
           if (player) {
             p.buy_amount = player.buy_amount
             p.current_amount = player.current_amount
           }
         })
+      }).finally(() => {
+        Loading.hide()
       })
     }
 
