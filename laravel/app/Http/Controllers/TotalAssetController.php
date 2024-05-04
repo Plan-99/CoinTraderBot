@@ -67,6 +67,6 @@ class TotalAssetController extends Controller
         $result = json_decode($res->getBody()->getContents());
         $ask = $result->data->asks[0];
         $bid = $result->data->bids[0];
-        return $ask->quantity > $bid->quantity ? (int) $ask->price : (int) $bid->price;
+        return $ask->quantity > $bid->quantity ? (float) $ask->price : (float) $bid->price;
     }
 }
