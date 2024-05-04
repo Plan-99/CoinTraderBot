@@ -32,6 +32,7 @@ class TotalAssetController extends Controller
                 $currentPrice = $asset['symbol'] === 'KRW' ? 1 : $this->getCurrentPrice($asset['symbol']);
                 $symbol['buy_amount'] += $asset['buy_price'] * $asset['quantity'];
                 $symbol['current_amount'] += $currentPrice * $asset['quantity'];
+                $symbol['current_price'] = $currentPrice;
             }
             $symbols[] = $symbol;
         }
